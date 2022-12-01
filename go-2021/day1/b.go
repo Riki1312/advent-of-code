@@ -1,14 +1,14 @@
 package day1
 
 import (
-	"aoc/2021/utils"
+	"aoc/go-2021/utils"
 	"fmt"
 	"strconv"
 
 	lo "github.com/samber/lo"
 )
 
-func RunA() {
+func RunB() {
 	lines, err := utils.FileToLines("./day1/input.txt")
 	if err != nil {
 		fmt.Println(err)
@@ -22,17 +22,22 @@ func RunA() {
 		return r
 	})
 
-	var pred = values[0]
-	var succ = values[1]
+	var pred = values[0] + values[1] + values[2]
+	var succ = values[1] + values[2] + values[3]
 	var incr = 0
 
-	for _, v := range values {
+	for i := range values {
 		if succ-pred > 0 {
 			incr++
 		}
 
+		indx := i + 2
+		if indx+2 >= len(values) {
+			break
+		}
+
 		pred = succ
-		succ = v
+		succ = values[indx] + values[indx+1] + values[indx+2]
 	}
 
 	fmt.Println(incr)

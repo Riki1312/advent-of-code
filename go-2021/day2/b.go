@@ -1,12 +1,12 @@
 package day2
 
 import (
-	"aoc/2021/utils"
+	"aoc/go-2021/utils"
 	"fmt"
 	"strconv"
 )
 
-func RunA() {
+func RunB() {
 	words, err := utils.FileToWords("./day2/input.txt")
 	if err != nil {
 		fmt.Println(err)
@@ -14,6 +14,7 @@ func RunA() {
 
 	var position = 0
 	var depth = 0
+	var aim = 0
 
 	for i := range words {
 		if i+1 >= len(words) {
@@ -33,10 +34,11 @@ func RunA() {
 
 		if move == "forward" {
 			position += value
+			depth += aim * value
 		} else if move == "up" {
-			depth -= value
+			aim -= value
 		} else if move == "down" {
-			depth += value
+			aim += value
 		}
 	}
 
