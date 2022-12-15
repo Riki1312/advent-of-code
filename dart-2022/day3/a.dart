@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import '../utils.dart';
+import 'package:basics/basics.dart';
 
 void main() {
   final input = File("input.txt").readAsStringSync().trim();
@@ -11,14 +11,12 @@ void main() {
       .map((l) => [l.sublist(0, l.length ~/ 2), l.sublist(l.length ~/ 2)])
       .map((l) => l[0].where((e) => l[1].contains(e)).first)
       .map((e) {
-        if (e.toUpperCase() == e) {
-          return e.codeUnits.first - "A".codeUnits.first + 27;
-        } else {
-          return e.codeUnits.first - "a".codeUnits.first + 1;
-        }
-      })
-      .toList()
-      .sum;
+    if (e.toUpperCase() == e) {
+      return e.codeUnits.first - "A".codeUnits.first + 27;
+    } else {
+      return e.codeUnits.first - "a".codeUnits.first + 1;
+    }
+  }).sum();
 
   print(result);
 }

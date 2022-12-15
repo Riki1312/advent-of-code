@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import '../utils.dart';
+import 'package:basics/basics.dart';
 
 var scoreMap = [
   [1 + 3, 1 + 0, 1 + 6],
@@ -46,5 +46,5 @@ void main() {
     return scoreMap[j][i];
   });
 
-  print(result.sum);
+  print(result.sum());
 }
