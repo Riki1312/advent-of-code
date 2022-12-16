@@ -18,8 +18,7 @@ void main() {
       .skip(1)
       .map((s) => s.replaceAll("    ", "0"))
       .map((s) => RegExp(r"[A-Z]|0").allMatches(s))
-      .map((m) => m.take(count).map((m) => m[0]!))
-      .map((l) => l.toList());
+      .map((m) => m.take(count).map((m) => m[0]!).toList());
 
   //print(values);
 
@@ -60,8 +59,6 @@ void main() {
       stacks[to].push(stacks[from].pop()!);
     }
   }
-
-  //print(stacks);
 
   var result = "";
   for (Stack stack in stacks) {
