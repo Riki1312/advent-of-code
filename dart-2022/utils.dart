@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:quiver/iterables.dart';
 
 /// A range of numbers.
@@ -22,6 +24,35 @@ class Range<T extends num> {
   /// Checks if the range contains [other] range.
   bool contains(Range<T> other) {
     return start <= other.start && end >= other.end;
+  }
+}
+
+class Stack<T> {
+  final _queue = Queue<T>();
+
+  bool get isEmpty => _queue.isEmpty;
+  bool get isNotEmpty => _queue.isNotEmpty;
+  int get length => this._queue.length;
+
+  void clear() {
+    _queue.clear();
+  }
+
+  void push(T element) {
+    _queue.addLast(element);
+  }
+
+  T? pop() {
+    return this.isEmpty ? null : _queue.removeLast();
+  }
+
+  T? peek() {
+    return this.isEmpty ? null : _queue.last;
+  }
+
+  @override
+  String toString() {
+    return _queue.toString();
   }
 }
 
