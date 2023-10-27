@@ -1,3 +1,7 @@
+mod a;
+mod b;
+
 fn main() {
-    println!("Hello, world!");
+    //a::run();
+    b::run();
 }
