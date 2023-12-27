@@ -29,15 +29,29 @@ pub fn process(raw: &str) -> ProcessResult {
 
             (e, indexes)
         })
+        .map(|(e, indexes)| {
+            (e, indexes.into_iter()
+                .filter(|i| input.chars().nth(*i).expect("index must be in range") == '*')
+                .collect::<HashSet<usize>>())
+        })
         .collect();
 
-    let result: i32 = elements.iter()
-        .filter(|(_, indexes)| {
-            indexes.iter()
-                .map(|i| input.chars().nth(*i).expect("index must be in range"))
-                .any(|c| !c.is_ascii_digit() && c != '.')
+    let gears: HashSet<usize> = elements.iter()
+        .flat_map(|(_, indexes)| indexes.clone())
+        .collect();
+
+    let gears_nums: HashSet<(usize, Vec<i32>)> = gears.into_iter()
+        .map(|i| {
+            (i, elements.iter()
+                .filter(|(_, indexes)| indexes.contains(&i))
+                .map(|(e, _)| e.num)
+                .collect::<Vec<i32>>())
         })
-        .map(|(e, _)| e.num)
+        .filter(|(_, v)| v.len() >= 2)
+        .collect();
+
+    let result: i32 = gears_nums.into_iter()
+        .map(|(_, v)| v.iter().product::<i32>())
         .sum();
 
     return Ok(result.to_string());
@@ -91,6 +105,6 @@ mod tests {
 ...$.*....
 .664.598..";
         let result = process(input).unwrap();
-        assert_eq!(result, "4361");
+        assert_eq!(result, "467835");
     }
 }
