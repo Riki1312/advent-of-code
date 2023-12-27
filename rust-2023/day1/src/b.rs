@@ -30,7 +30,7 @@ fn get_number(line: &str, idx: usize) -> Option<char> {
 fn find_number(line: &str, idx: usize) -> Option<char> {
     ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"].iter()
         .enumerate()
-        .find(|(i, e)| {
+        .find(|(_, e)| {
             line[idx..].starts_with(e.chars().as_str())
         })
         .map(|(i, _)| {
